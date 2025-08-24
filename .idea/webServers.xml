@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8e4f0386-12fe-449b-8677-279317091a0f" name="digiwin">
+        <fileTransfer rootFolder="/Default/AI/AI004/deepseek-r1-distill-qwen2.5-7b" accessType="SFTP" host="172.16.2.173" port="22222" sshConfigId="f3f99e67-7963-4572-93b9-9a474529a8ec" sshConfig="dev_test001@172.16.2.173:22222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

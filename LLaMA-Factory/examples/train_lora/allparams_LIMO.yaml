@@ -1,0 +1,49 @@
+### model
+model_name_or_path: ../Models/qwen/Qwen2.5-7B-Instruct
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+lora_rank: 8 # 降低秩，减少过拟合风险
+lora_alpha: 16
+lora_dropout: 0.05 # 新增：LORA层 dropout，防止过拟合
+
+### dataset
+dataset: mydataset_LIMO_deepseek_qwen2.5_7B
+template: qwen
+cutoff_len: 2048
+max_samples: 817 # 严格匹配数据量
+overwrite_cache: true
+preprocessing_num_workers: 8 # 小数据适当降低，节省资源
+
+### output
+output_dir: ../Models/qwen/allparams_LIMO
+logging_steps: 5 # 更频繁监控训练
+save_steps: 30 # 小步长保存，便于选择最佳模型
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 1
+optim: adamw_torch
+learning_rate: 2.0e-5 # 降低学习率，避免参数震荡
+num_train_epochs: 8 # 增加epoch数（小数据需更多轮次学习模式，但需防过拟合）
+lr_scheduler_type: cosine # 固定学习率，避免过早衰减
+warmup_ratio: 0.05 # 缩短热身阶段，快速进入有效训练
+bf16: true
+ddp_timeout: 180000000
+weight_decay: 0.01 # 新增：权重衰减，抑制过拟合
+
+### eval
+val_size: 0.1 # 增大验证集比例（40条），更可靠评估过拟合
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 30 # 每50步验证一次，及时发现过拟合
+
+### 以保存最后一个模型 & 最佳模型（更安全）
+save_total_limit: 3
+load_best_model_at_end: true
+metric_for_best_model: eval_loss
