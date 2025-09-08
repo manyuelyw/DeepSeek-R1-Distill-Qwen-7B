@@ -1,4 +1,4 @@
-1.1 从deepseek-r1中蒸馏数据流程：
+# 从deepseek-r1中蒸馏数据流程：
 首先，从deepseek官网进入API调用平台，充值，创建API Key；
 然后是数据集选择，选择数学推理领域常用开源数据集gsm8k作为指令数据集，考虑到gsm8k数据集为小学数学推理任务，常用于评估 Chain-of-Thought 推理能力，数据格式如下：
 {
@@ -1021,4 +1021,5 @@ https://docs.qq.com/sheet/DS1pvYUNFWnBzbHBj?tab=9w07ym
 3.性能对比结果
 https://docs.qq.com/sheet/DS1pvYUNFWnBzbHBj?tab=9w07ym
 4.参考
+
 
